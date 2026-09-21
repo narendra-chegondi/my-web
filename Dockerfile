@@ -1,15 +1,6 @@
-FROM nginx:alpine
-
-LABEL maintainer="narendra"
-LABEL description="FoodExpress static web app served via nginx"
-
-RUN rm -rf /usr/share/nginx/html/*
-
-COPY . /usr/share/nginx/html/
-
+FROM nginx
+MAINTAINER Narendra
+LABEL This is my web site
 EXPOSE 80
+COPY index.html /usr/share/nginx/html/
 
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD wget -qO- http://localhost/ || exit 1
-
-CMD ["nginx", "-g", "daemon off;"]
